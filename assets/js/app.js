@@ -397,3 +397,37 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 });
 /* ===== END SAFE POPUP WIRING ===== */
+
+/* ===== AIM_MENU_FIX ===== */
+document.addEventListener("DOMContentLoaded", ()=>{
+  const btn = document.querySelector("[data-menu-btn]");
+  const menu = document.querySelector("[data-menu]");
+  if(btn && menu){
+    function openMenu(){
+      menu.classList.add("open");
+      btn.setAttribute("aria-expanded","true");
+      document.body.style.overflow="hidden";
+    }
+    function closeMenu(){
+      menu.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      document.body.style.overflow="";
+    }
+    btn.addEventListener("click", ()=>{
+      menu.classList.contains("open") ? closeMenu() : openMenu();
+    });
+    // close when tapping background overlay
+    menu.addEventListener("click",(e)=>{
+      if(e.target === menu) closeMenu();
+    });
+    // close on link click
+    menu.querySelectorAll("a").forEach(a=>{
+      a.addEventListener("click", ()=> closeMenu());
+    });
+    // escape close
+    document.addEventListener("keydown",(e)=>{
+      if(e.key==="Escape") closeMenu();
+    });
+  }
+});
+/* ===== END AIM_MENU_FIX ===== */

@@ -352,3 +352,91 @@ input:focus{border-color:rgba(31,211,106,.45); box-shadow:0 0 0 4px rgba(31,211,
 }
 .userbadge__actions{display:flex;gap:10px;margin-top:10px}
 .userbadge__actions .btn{padding:10px 12px;border-radius:14px;font-size:13px}
+
+/* ===== AIM DASHBOARD LAYOUT ===== */
+.dash{padding:18px 0 40px}
+.dash__head{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-end;margin:16px 0 14px}
+.dash__title{margin:0;font-size:28px;letter-spacing:-.4px}
+.dash__headActions{display:flex;gap:10px;flex-wrap:wrap}
+.dash__gridTop{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px}
+@media(max-width:900px){.dash__gridTop{grid-template-columns:1fr}}
+
+.dashCard{padding:16px}
+.dashCard__row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.dashCard__big{font-size:24px;font-weight:900;margin-top:4px}
+
+.tag{padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
+.tag--ok{border-color:rgba(31,211,106,.25);background:rgba(31,211,106,.08)}
+
+.quickActions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+
+.dash__gridMain{display:grid;grid-template-columns:1.25fr .85fr;gap:14px;margin-top:14px;align-items:start}
+@media(max-width:900px){.dash__gridMain{grid-template-columns:1fr}}
+
+.dashBlock{padding:16px}
+.dashBlock__head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.dashBlock__title{font-size:16px;font-weight:900;margin-top:3px}
+.dashBlock__footer{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+.marketList{display:grid;gap:10px}
+.marketRow{display:grid;grid-template-columns:1.2fr .6fr .4fr;gap:10px;align-items:center;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.03)}
+.coin{display:flex;gap:10px;align-items:center}
+.coinIco{width:36px;height:36px;border-radius:14px;display:grid;place-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08);font-weight:900}
+.coinName{font-weight:900}
+.price{font-weight:900;text-align:right}
+.chg{text-align:right;font-weight:900;font-size:13px}
+.chg.up{color:rgba(31,211,106,.95)}
+.chg.down{color:rgba(231,76,60,.95)}
+.chg.flat{color:rgba(255,255,255,.6)}
+
+.poolList{display:grid;gap:12px}
+.pool__name{font-weight:900}
+.bar{height:10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);overflow:hidden;margin-top:8px}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),rgba(31,211,106,.25))}
+
+.feed{display:grid;gap:10px}
+.feedItem{padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:rgba(255,255,255,.82)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:999px;margin-right:8px;vertical-align:middle}
+.dot.ok{background:rgba(31,211,106,.95)}
+.dot.warn{background:rgba(241,196,15,.95)}
+
+/* Homepage chart card */
+.chartcard{padding:16px}
+.chartcard__top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.chartTitle{font-weight:900;font-size:16px;margin-top:3px}
+.chartPills{display:flex;gap:10px;flex-wrap:wrap}
+#aimLiveChart{width:100%;height:auto;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.18)}
+
+/* ===== AIM APP PAGES THEME ===== */
+.app-bg{background:radial-gradient(900px 520px at 20% 10%, rgba(31,211,106,.12), transparent 55%),
+               radial-gradient(900px 520px at 90% 30%, rgba(0,180,255,.10), transparent 55%),
+               linear-gradient(180deg,#070b14,#060914 50%,#050815);
+      min-height:100vh;color:rgba(255,255,255,.9)}
+
+.topbar{position:sticky;top:0;z-index:50;background:rgba(6,10,18,.72);backdrop-filter:blur(10px);
+        border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar__inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{font-weight:900;letter-spacing:.5px;text-decoration:none;color:rgba(255,255,255,.92)}
+.brand__aim{color:rgba(255,255,255,.92)}
+.brand__accent{color:var(--accent);margin-left:6px}
+
+.navlinks{display:flex;gap:16px;align-items:center}
+.navlinks a{color:rgba(255,255,255,.78);text-decoration:none;font-weight:700}
+.navlinks a:hover{color:#fff}
+.nav-sep{width:1px;height:22px;background:rgba(255,255,255,.10);margin:0 4px}
+
+.hamburger{display:none;gap:5px;flex-direction:column;justify-content:center;
+          width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.10);
+          background:rgba(255,255,255,.03)}
+.hamburger span{display:block;height:2px;width:18px;background:rgba(255,255,255,.78);margin:0 auto;border-radius:2px}
+
+@media(max-width:900px){
+  .hamburger{display:flex}
+  .navlinks{position:fixed;inset:0;display:none;place-items:center;align-content:center;gap:18px;
+           background:rgba(5,8,18,.78);backdrop-filter:blur(12px);padding:22px}
+  .navlinks.open{display:grid}
+  .navlinks a{font-size:18px}
+}
+
+/* Fix overlay sticking + clicking */
+.navlinks.open{touch-action:manipulation}
