@@ -1,162 +1,254 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>AIMCryptoAI — AI-Powered Crypto Investing</title>
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AIMCryptoAI — AI-powered crypto investing</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
+<body class="app-bg">
+  <!-- Top Bar -->
   <header class="topbar">
-    <div class="brand">
-      <span class="brand-aim">AIM</span><span class="brand-crypto">CRYPTOAI</span>
+    <div class="topbar__inner container">
+      <a class="brand" href="index.html" aria-label="AIMCryptoAI Home">
+        <span class="brand__aim">AIM</span><span class="brand__accent">CryptoAI</span>
+      </a>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" data-menu-btn>
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navlinks" data-menu>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <span class="nav-sep"></span>
+        <a class="btn btn--ghost btn--sm" href="login.html">Log in</a>
+        <a class="btn btn--primary btn--sm" href="signup.html">Get Started</a>
+      </nav>
     </div>
-    <nav class="topnav">
-      <a href="#how">How it works</a>
-      <a href="#features">Features</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn ghost" href="login.html">Log in</a>
-      <a class="btn primary" href="signup.html">Get Started</a>
-    </nav>
   </header>
 
-  <main class="container">
+  <!-- Hero -->
+  <main>
     <section class="hero">
-      <div class="hero-left">
-        <h1>AI-powered crypto investing — built for serious growth.</h1>
-        <p class="muted">
-          AIMCryptoAI helps you track markets, manage deposits, and access AI-guided strategy pools — all from one clean dashboard.
-        </p>
+      <div class="hero__bg" style="background-image:url('assets/images/hero/hero-ai-dashboard.jpg');"></div>
+      <div class="hero__overlay"></div>
 
-        <div class="hero-cta">
-          <a class="btn primary big" href="signup.html">Get Started</a>
-          <a class="btn ghost big" href="login.html">Log in</a>
-        </div>
+      <div class="container hero__content">
+        <div class="hero__grid">
+          <div class="hero__text">
+            <p class="pill">AI-Managed • Risk-capped • Mobile-first</p>
+            <h1>AI-powered crypto investing — built for serious growth.</h1>
+            <p class="lead">
+              AIMCryptoAI helps you track markets, manage deposits, and access AI-guided strategy pools —
+              all from one clean dashboard.
+            </p>
 
-        <div class="note small">
-          Disclaimer: This is a demo interface and not financial advice. Crypto involves risk.
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="card glass">
-          <div class="card-row">
-            <div class="badge">Welcome Bonus</div>
-            <div class="muted small">Until <b>Dec 18, 2025</b></div>
-          </div>
-          <h3 class="mt8">Bonus up to <span class="accent">100%</span></h3>
-          <p class="muted small">Complete verification and fund your wallet to unlock benefits.</p>
-          <div class="chip-row">
-            <span class="chip">VIP Program</span>
-            <span class="chip">AI Pools</span>
-            <span class="chip">Live Charts</span>
-          </div>
-        </div>
-
-        <div class="grid2 mt16">
-          <div class="card glass mini">
-            <div class="ico">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 1l9 4v6c0 5-3.8 9.7-9 12-5.2-2.3-9-7-9-12V5l9-4z" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div class="cta">
+              <a class="btn btn--primary" href="signup.html">Get Started</a>
+              <a class="btn btn--ghost" href="login.html">Log in</a>
             </div>
-            <div>
-              <b>Security-first</b>
-              <div class="muted small">KYC + session protection</div>
+
+            <p class="subnote">
+              Disclaimer: This is a demo interface and not financial advice. Crypto involves risk.
+            </p>
+
+            <div class="bonuscard">
+              <div class="bonuscard__tag">
+                <span class="bonus-ico" aria-hidden="true">🎁</span>
+                <span>WELCOME BONUS</span>
+              </div>
+              <div class="bonuscard__body">
+                <div>
+                  <div class="muted">Until Dec 18, 2025</div>
+                  <div class="bonuscard__title">Bonus up to <b>100%</b></div>
+                  <div class="muted">Complete verification and fund your wallet to unlock benefits.</div>
+                </div>
+                <div class="bonuscard__actions">
+                  <button class="chip" type="button" data-toast="VIP Program coming next.">VIP Program</button>
+                  <button class="chip" type="button" onclick="location.href='dashboard.html'">AI Pools</button>
+                  <button class="chip" type="button" data-toast="Live charts will be connected to a real API later.">Live Charts</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="card glass mini">
-            <div class="ico">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 4-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+          <div class="hero__cards">
+            <div class="card media-card">
+              <div class="media">
+                <img src="assets/images/cards/crypto-chart.jpg" alt="Crypto chart preview" />
+              </div>
+              <div class="card__body">
+                <h3>Real-feel market view</h3>
+                <p class="muted">Charts, price list, and AI signals UI-ready for a real data connection.</p>
+              </div>
             </div>
-            <div>
-              <b>Market insights</b>
-              <div class="muted small">Live-style charts & signals</div>
+
+            <div class="card media-card">
+              <div class="media">
+                <img src="assets/images/cards/team-traders.jpg" alt="Team of traders" />
+              </div>
+              <div class="card__body">
+                <h3>Pro-grade structure</h3>
+                <p class="muted">Clear pools, clean flows, and KYC-first access control to look legit.</p>
+              </div>
+            </div>
+
+            <div class="card smallstat">
+              <div class="smallstat__row">
+                <div>
+                  <div class="muted">Strategy Pools</div>
+                  <div class="big">3</div>
+                </div>
+                <div>
+                  <div class="muted">Min Deposit</div>
+                  <div class="big">$50</div>
+                </div>
+              </div>
+              <button class="btn btn--ghost btn--full" type="button" onclick="location.href='signup.html'">
+                Open your dashboard
+              </button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="how" class="section">
-      <h2>How it works</h2>
-      <div class="grid3 mt16">
-        <div class="card glass">
-          <div class="step">1</div>
-          <h3>Create your account</h3>
-          <p class="muted">Sign up in seconds. Your dashboard is ready instantly.</p>
+    <!-- How it works -->
+    <section class="section container" id="how">
+      <div class="section__head">
+        <h2>How it works</h2>
+        <p class="muted">Simple, clear steps that feel like a real platform.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card stepcard">
+          <div class="stepnum">1</div>
+          <h3>Create account</h3>
+          <p class="muted">Sign up and secure your access. Login checks saved details.</p>
+          <a class="link" href="signup.html">Get started →</a>
         </div>
-        <div class="card glass">
-          <div class="step">2</div>
+
+        <div class="card stepcard">
+          <div class="stepnum">2</div>
           <h3>Verify (KYC)</h3>
           <p class="muted">Upload basic details to enable deposits and withdrawals.</p>
+          <a class="link" href="profile.html">Go to KYC →</a>
         </div>
-        <div class="card glass">
-          <div class="step">3</div>
+
+        <div class="card stepcard">
+          <div class="stepnum">3</div>
           <h3>Deposit & run strategy</h3>
-          <p class="muted">Choose a funding method and join AI pools based on risk level.</p>
+          <p class="muted">Choose a funding method and join AI pools by risk level.</p>
+          <a class="link" href="payments.html">Open payments →</a>
         </div>
       </div>
     </section>
 
-    <section id="features" class="section">
-      <h2>What you get</h2>
-      <div class="grid3 mt16">
-        <div class="card glass">
+    <!-- Features -->
+    <section class="section container" id="features">
+      <div class="section__head">
+        <h2>What you get</h2>
+        <p class="muted">Designed for trust, clarity, and premium look.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card feature">
           <h3>Payments hub</h3>
           <p class="muted">Card, bank, crypto and gift-card deposit flows (UI-ready).</p>
+          <button class="btn btn--ghost btn--sm" type="button" onclick="location.href='payments.html'">View payments</button>
         </div>
-        <div class="card glass">
-          <h3>Tournaments</h3>
-          <p class="muted">Competitions, prize pools, and history — like the apps you showed.</p>
+
+        <div class="card feature">
+          <h3>AI Pools & risk tiers</h3>
+          <p class="muted">Balanced to aggressive pools with targets and deposit minimums.</p>
+          <button class="btn btn--ghost btn--sm" type="button" onclick="location.href='dashboard.html#pools'">See pools</button>
         </div>
-        <div class="card glass">
-          <h3>Wallet & convert</h3>
-          <p class="muted">Balance overview, conversions, and AI allocation view.</p>
+
+        <div class="card feature">
+          <h3>Live updates feed</h3>
+          <p class="muted">AI signal feed section that looks real and can later be wired to API.</p>
+          <button class="btn btn--ghost btn--sm" type="button" data-toast="We’ll connect real feed later.">Preview</button>
+        </div>
+
+        <div class="card feature">
+          <h3>Profile + KYC</h3>
+          <p class="muted">Photo upload, basic profile, and KYC status for access control vibe.</p>
+          <button class="btn btn--ghost btn--sm" type="button" onclick="location.href='profile.html'">Open profile</button>
         </div>
       </div>
     </section>
 
-    <section id="testimonials" class="section">
-      <h2>Testimonials</h2>
-      <div class="grid3 mt16">
-        <div class="card glass">
-          <p>“Clean UI. The dashboard feels premium and simple to understand.”</p>
-          <div class="muted small">— Daniel K.</div>
+    <!-- Testimonials -->
+    <section class="section container" id="testimonials">
+      <div class="section__head">
+        <h2>Testimonials</h2>
+        <p class="muted">Trust signals (we can add 10+ later).</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card quote">
+          <p>“The dashboard is clean and the pools are easy to understand.”</p>
+          <div class="muted">— Aisha M.</div>
         </div>
-        <div class="card glass">
-          <p>“I like the way deposits and wallet sections are arranged.”</p>
-          <div class="muted small">— Aisha M.</div>
+        <div class="card quote">
+          <p>“Looks premium. The flow feels like a real trading platform.”</p>
+          <div class="muted">— Mike T.</div>
         </div>
-        <div class="card glass">
-          <p>“The AI pools are clearly explained. Looks professional.”</p>
-          <div class="muted small">— Mike T.</div>
+        <div class="card quote">
+          <p>“I like the KYC + payments layout. It feels legit and structured.”</p>
+          <div class="muted">— Sandra K.</div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="section">
-      <h2>FAQ</h2>
-      <div class="card glass mt16">
-        <details class="faq">
+    <!-- FAQ -->
+    <section class="section container" id="faq">
+      <div class="section__head">
+        <h2>FAQ</h2>
+      </div>
+
+      <div class="card faq">
+        <details>
           <summary>Is this real investing?</summary>
-          <p class="muted">This build is a demo interface and is not financial advice. Real investing requires compliance, custody, and risk disclosures.</p>
+          <p class="muted">This is a demo UI. If you later connect backend + compliance, we can convert it to real operations.</p>
         </details>
-        <details class="faq">
+        <details>
           <summary>Do I need KYC?</summary>
-          <p class="muted">For a realistic platform flow: yes, deposits/withdrawals should require verification.</p>
+          <p class="muted">For the platform vibe, yes — KYC enables deposits/withdrawals and reduces fraud.</p>
         </details>
-        <details class="faq">
+        <details>
           <summary>How do I start?</summary>
-          <p class="muted">Click Get Started, create your account, then enter the dashboard.</p>
+          <p class="muted">Create an account → complete KYC → go to Payments to fund → choose a pool on Dashboard.</p>
         </details>
       </div>
     </section>
-
-    <footer class="footer">
-      <div class="muted small">© AIMCryptoAI — Demo UI</div>
-      <div class="muted small">Built with Aim colors + dark luxury style</div>
-    </footer>
   </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="brand brand--small">
+          <span class="brand__aim">AIM</span><span class="brand__accent">CryptoAI</span>
+        </div>
+        <div class="muted">Built with Aim colors + dark luxury style.</div>
+      </div>
+      <div class="footer__links">
+        <a href="login.html">Login</a>
+        <a href="signup.html">Get Started</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile/KYC</a>
+      </div>
+    </div>
+    <div class="container footer__bottom muted">© AIMCryptoAI — Demo UI</div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite" aria-atomic="true" hidden data-toastbox>
+    <div class="toast__inner" data-toasttext></div>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>

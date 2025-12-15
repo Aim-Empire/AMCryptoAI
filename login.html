@@ -1,46 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AIM Crypto AI – Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — AIMCryptoAI</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body class="page auth-page">
+<body class="app-bg">
   <header class="topbar">
-    <div class="logo">AIM<span>Crypto</span>AI</div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="login.html" class="active">Login</a>
-      <a href="signup.html" class="btn btn-outline">Sign Up</a>
-    </nav>
+    <div class="topbar__inner container">
+      <a class="brand" href="index.html">
+        <span class="brand__aim">AIM</span><span class="brand__accent">CryptoAI</span>
+      </a>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" data-menu-btn>
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navlinks" data-menu>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#testimonials">Testimonials</a>
+        <a href="index.html#faq">FAQ</a>
+        <span class="nav-sep"></span>
+        <a class="btn btn--ghost btn--sm" href="signup.html">Sign up</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="content auth-content">
-    <div class="card auth-card">
+  <main class="container authwrap">
+    <section class="card authcard">
       <h1>Login</h1>
       <p class="muted">Enter your details to access your dashboard.</p>
-      <form id="loginForm">
-        <label>
-          Email
-          <input type="email" id="loginEmail" placeholder="you@example.com" required>
+
+      <form id="loginForm" class="form">
+        <label class="field">
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@example.com" required />
         </label>
-        <label>
-          Password
-          <input type="password" id="loginPass" placeholder="••••••••" required>
+
+        <label class="field">
+          <span>Password</span>
+          <input type="password" name="password" placeholder="••••••••" required minlength="6" />
         </label>
-        <button type="submit" class="btn btn-primary">Login</button>
+
+        <button class="btn btn--primary btn--full" type="submit">Log in</button>
+        <button class="btn btn--ghost btn--full" type="button" id="demoBtn">Continue with demo account</button>
+
         <p class="muted small">
           Don’t have an account?
-          <a href="signup.html">Create one</a>
+          <a class="link" href="signup.html">Create one</a>
         </p>
       </form>
-    </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> AIM Crypto AI.</p>
-  </footer>
+  <div class="toast" role="status" aria-live="polite" aria-atomic="true" hidden data-toastbox>
+    <div class="toast__inner" data-toasttext></div>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>

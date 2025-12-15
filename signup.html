@@ -1,63 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AIM Crypto AI – Sign Up</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up — AIMCryptoAI</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body class="page auth-page">
+<body class="app-bg">
   <header class="topbar">
-    <div class="logo">AIM<span>Crypto</span>AI</div>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="signup.html" class="active btn btn-outline">Sign Up</a>
-    </nav>
+    <div class="topbar__inner container">
+      <a class="brand" href="index.html">
+        <span class="brand__aim">AIM</span><span class="brand__accent">CryptoAI</span>
+      </a>
+
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" data-menu-btn>
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navlinks" data-menu>
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#testimonials">Testimonials</a>
+        <a href="index.html#faq">FAQ</a>
+        <span class="nav-sep"></span>
+        <a class="btn btn--ghost btn--sm" href="login.html">Log in</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="content auth-content">
-    <div class="card auth-card">
+  <main class="container authwrap">
+    <section class="card authcard">
       <h1>Create Account</h1>
       <p class="muted">Open your AI-powered crypto dashboard in a few seconds.</p>
-      <form id="signupForm">
-        <label>
-          Full Name
-          <input type="text" placeholder="Your full name" required>
-        </label>
-        <label>
-          Email
-          <input type="email" id="signupEmail" placeholder="you@example.com" required>
-        </label>
-        <label>
-          Password
-          <input type="password" id="signupPass" placeholder="Create a password" required>
-        <label class="muted">Confirm Password</label>
-        <input type="password" id="signupPass2" placeholder="Repeat password" />
 
+      <form id="signupForm" class="form">
+        <label class="field">
+          <span>Full name</span>
+          <input type="text" name="name" placeholder="Your full name" required minlength="2" />
         </label>
-        <label>
-          Confirm Password
-          <input type="password" placeholder="Repeat password" required>
+
+        <label class="field">
+          <span>Email</span>
+          <input type="email" name="email" placeholder="you@example.com" required />
         </label>
-        <label class="checkbox-row">
-          <input type="checkbox" required>
+
+        <label class="field">
+          <span>Password</span>
+          <input type="password" name="password" placeholder="Create a password" required minlength="6" />
+        </label>
+
+        <label class="field">
+          <span>Confirm password</span>
+          <input type="password" name="confirm" placeholder="Repeat password" required minlength="6" />
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="terms" required />
           <span>I agree to the terms and understand this is not guaranteed profit.</span>
         </label>
-        <button type="submit" class="btn btn-primary" onclick="window.location.href='dashboard.html'; return false;">
-          Get Started
-        </button>
+
+        <button class="btn btn--primary btn--full" type="submit">Get Started</button>
+
         <p class="muted small">
           Already have an account?
-          <a href="login.html">Login</a>
+          <a class="link" href="login.html">Login</a>
         </p>
       </form>
-    </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <p>&copy; <span id="year"></span> AIM Crypto AI.</p>
-  </footer>
+  <div class="toast" role="status" aria-live="polite" aria-atomic="true" hidden data-toastbox>
+    <div class="toast__inner" data-toasttext></div>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>
