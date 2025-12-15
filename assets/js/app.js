@@ -6,10 +6,6 @@
     if(!box || !text) return alert(msg);
     text.textContent = msg;
     box.hidden = false;
-    box.classList.remove("show");
-    // simple reflow
-    void box.offsetWidth;
-    box.classList.add("show");
     clearTimeout(window.__toastTimer);
     window.__toastTimer = setTimeout(()=>{ box.hidden = true; }, 2200);
   }
@@ -28,7 +24,6 @@
       const open = menu.classList.toggle("open");
       menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
     });
-    // click outside to close
     document.addEventListener("click", (e)=>{
       if(!menu.classList.contains("open")) return;
       if(e.target.closest("[data-menu]") || e.target.closest("[data-menu-btn]")) return;
@@ -39,26 +34,36 @@
 
   // ---------- Local Auth (Demo-ready) ----------
   const STORAGE_KEY = "aimcryptoai_user";
+  const LOGIN_KEY = "aimcryptoai_logged_in";
 
   function getUser(){
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); }
     catch { return null; }
   }
+  function setUser(u){ localStorage.setItem(STORAGE_KEY, JSON.stringify(u)); }
+  function isLoggedIn(){ return localStorage.getItem(LOGIN_KEY) === "1"; }
+  function setLoggedIn(val){ localStorage.setItem(LOGIN_KEY, val ? "1" : "0"); }
 
-  function setUser(u){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
+  function goDashboard(){ window.location.href = "dashboard.html"; }
+
+  function logout(){
+    setLoggedIn(false);
+    toast("Logged out ✅");
+    setTimeout(()=>{ window.location.href = "login.html"; }, 450);
   }
 
-  function setLoggedIn(val){
-    localStorage.setItem("aimcryptoai_logged_in", val ? "1" : "0");
+  // ---------- Page protection ----------
+  const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const publicPages = new Set(["index.html","login.html","signup.html",""]);
+
+  if(!publicPages.has(page)){
+    if(!isLoggedIn()){
+      window.location.replace("login.html");
+      return;
+    }
   }
 
-  function goDashboard(){
-    // keep it simple: open dashboard.html
-    window.location.href = "dashboard.html";
-  }
-
-  // Signup
+  // ---------- Signup ----------
   const signupForm = document.getElementById("signupForm");
   if(signupForm){
     signupForm.addEventListener("submit", (e)=>{
@@ -83,7 +88,7 @@
     });
   }
 
-  // Login
+  // ---------- Login ----------
   const loginForm = document.getElementById("loginForm");
   if(loginForm){
     loginForm.addEventListener("submit", (e)=>{
@@ -93,14 +98,8 @@
       const pass = String(fd.get("password")||"");
 
       const u = getUser();
-      if(!u){
-        toast("No account found. Please sign up first.");
-        return;
-      }
-      if(u.email !== email || u.pass !== pass){
-        toast("Invalid email or password.");
-        return;
-      }
+      if(!u) return toast("No account found. Please sign up first.");
+      if(u.email !== email || u.pass !== pass) return toast("Invalid email or password.");
 
       setLoggedIn(true);
       toast("Login successful ✅ Opening dashboard...");
@@ -118,5 +117,63 @@
     }
   }
 
-  // Optional: protect internal pages in future (not blocking yet)
+  // ---------- User badge + auto-fill profile fields ----------
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll("\"","&quot;")
+      .replaceAll("\x27","&#039;");
+  }
+
+  function injectUserBadge(){
+    if(publicPages.has(page)) return;
+    if(document.querySelector(".userbadge")) return;
+
+    const u = getUser() || { name:"User", email:"unknown@aimcryptoai.com" };
+
+    const badge = document.createElement("div");
+    badge.className = "userbadge";
+    badge.innerHTML = `
+      <div class="userbadge__row">
+        <div>
+          <div class="userbadge__name">${escapeHtml(u.name || "User")}</div>
+          <div class="userbadge__email">${escapeHtml(u.email || "")}</div>
+        </div>
+        <div class="userbadge__tag">ACCOUNT</div>
+      </div>
+      <div class="userbadge__actions">
+        <button class="btn btn--ghost btn--full" type="button" id="userBadgeLogout">Logout</button>
+      </div>
+    `;
+    document.body.appendChild(badge);
+
+    const out = document.getElementById("userBadgeLogout");
+    if(out) out.addEventListener("click", logout);
+  }
+
+  function autofillProfile(){
+    if(page !== "profile.html") return;
+    const u = getUser();
+    if(!u) return;
+
+    // Try common ids if present
+    const nameEl = document.querySelector("#fullName, #name, [name=\"fullName\"], [name=\"name\"]");
+    const emailEl = document.querySelector("#email, #userEmail, [name=\"email\"]");
+    if(nameEl && !nameEl.value) nameEl.value = u.name || "";
+    if(emailEl && !emailEl.value) emailEl.value = u.email || "";
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    injectUserBadge();
+    autofillProfile();
+  });
+
+  // allow any element to trigger logout
+  document.addEventListener("click", (e)=>{
+    const el = e.target.closest("[data-logout], #logoutBtn");
+    if(el){ e.preventDefault(); logout(); }
+  });
+
 })();
