@@ -1,43 +1,162 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AIM Crypto AI – Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AIMCryptoAI — AI-Powered Crypto Investing</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
-<body class="page page-login">
-  <main class="auth-wrap">
-    <div class="auth-card">
-      <div class="auth-logo">AIM<span>Crypto</span>AI</div>
-      <p class="muted small center">
-        Secure AI-powered crypto investing for serious traders and beginners.
-      </p>
-
-      <form id="login-form" class="form auth-form">
-        <label>
-          Email
-          <input type="email" name="email" placeholder="you@example.com" required>
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" placeholder="••••••••" required>
-        </label>
-        <button type="submit" class="btn btn-primary full">Log in</button>
-      </form>
-
-      <div class="auth-extra">
-        <button class="btn btn-secondary full" id="demo-login-btn">
-          Continue with demo account
-        </button>
-        <p class="muted xsmall center">
-          By logging in you agree to AIM Crypto AI terms and understand this is a demo interface, not investment advice.
-        </p>
-      </div>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-aim">AIM</span><span class="brand-crypto">CRYPTOAI</span>
     </div>
-  </main>
+    <nav class="topnav">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn ghost" href="login.html">Log in</a>
+      <a class="btn primary" href="signup.html">Get Started</a>
+    </nav>
+  </header>
 
-  <div id="toast-container"></div>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>AI-powered crypto investing — built for serious growth.</h1>
+        <p class="muted">
+          AIMCryptoAI helps you track markets, manage deposits, and access AI-guided strategy pools — all from one clean dashboard.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn primary big" href="signup.html">Get Started</a>
+          <a class="btn ghost big" href="login.html">Log in</a>
+        </div>
+
+        <div class="note small">
+          Disclaimer: This is a demo interface and not financial advice. Crypto involves risk.
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card glass">
+          <div class="card-row">
+            <div class="badge">Welcome Bonus</div>
+            <div class="muted small">Until <b>Dec 18, 2025</b></div>
+          </div>
+          <h3 class="mt8">Bonus up to <span class="accent">100%</span></h3>
+          <p class="muted small">Complete verification and fund your wallet to unlock benefits.</p>
+          <div class="chip-row">
+            <span class="chip">VIP Program</span>
+            <span class="chip">AI Pools</span>
+            <span class="chip">Live Charts</span>
+          </div>
+        </div>
+
+        <div class="grid2 mt16">
+          <div class="card glass mini">
+            <div class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 1l9 4v6c0 5-3.8 9.7-9 12-5.2-2.3-9-7-9-12V5l9-4z" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <div>
+              <b>Security-first</b>
+              <div class="muted small">KYC + session protection</div>
+            </div>
+          </div>
+          <div class="card glass mini">
+            <div class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 4-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <b>Market insights</b>
+              <div class="muted small">Live-style charts & signals</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <h2>How it works</h2>
+      <div class="grid3 mt16">
+        <div class="card glass">
+          <div class="step">1</div>
+          <h3>Create your account</h3>
+          <p class="muted">Sign up in seconds. Your dashboard is ready instantly.</p>
+        </div>
+        <div class="card glass">
+          <div class="step">2</div>
+          <h3>Verify (KYC)</h3>
+          <p class="muted">Upload basic details to enable deposits and withdrawals.</p>
+        </div>
+        <div class="card glass">
+          <div class="step">3</div>
+          <h3>Deposit & run strategy</h3>
+          <p class="muted">Choose a funding method and join AI pools based on risk level.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2>What you get</h2>
+      <div class="grid3 mt16">
+        <div class="card glass">
+          <h3>Payments hub</h3>
+          <p class="muted">Card, bank, crypto and gift-card deposit flows (UI-ready).</p>
+        </div>
+        <div class="card glass">
+          <h3>Tournaments</h3>
+          <p class="muted">Competitions, prize pools, and history — like the apps you showed.</p>
+        </div>
+        <div class="card glass">
+          <h3>Wallet & convert</h3>
+          <p class="muted">Balance overview, conversions, and AI allocation view.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section">
+      <h2>Testimonials</h2>
+      <div class="grid3 mt16">
+        <div class="card glass">
+          <p>“Clean UI. The dashboard feels premium and simple to understand.”</p>
+          <div class="muted small">— Daniel K.</div>
+        </div>
+        <div class="card glass">
+          <p>“I like the way deposits and wallet sections are arranged.”</p>
+          <div class="muted small">— Aisha M.</div>
+        </div>
+        <div class="card glass">
+          <p>“The AI pools are clearly explained. Looks professional.”</p>
+          <div class="muted small">— Mike T.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <h2>FAQ</h2>
+      <div class="card glass mt16">
+        <details class="faq">
+          <summary>Is this real investing?</summary>
+          <p class="muted">This build is a demo interface and is not financial advice. Real investing requires compliance, custody, and risk disclosures.</p>
+        </details>
+        <details class="faq">
+          <summary>Do I need KYC?</summary>
+          <p class="muted">For a realistic platform flow: yes, deposits/withdrawals should require verification.</p>
+        </details>
+        <details class="faq">
+          <summary>How do I start?</summary>
+          <p class="muted">Click Get Started, create your account, then enter the dashboard.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="muted small">© AIMCryptoAI — Demo UI</div>
+      <div class="muted small">Built with Aim colors + dark luxury style</div>
+    </footer>
+  </main>
 
   <script src="assets/js/app.js"></script>
 </body>

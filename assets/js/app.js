@@ -1,220 +1,134 @@
-function showToast(message) {
-  const container = document.getElementById('toast-container');
-  if (!container) return;
-  const el = document.createElement('div');
-  el.className = 'toast';
-  el.textContent = message;
-  container.appendChild(el);
-  setTimeout(() => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(5px)';
-  }, 2200);
-  setTimeout(() => {
-    el.remove();
-  }, 2700);
+/* AIMCryptoAI UI + Demo Auth (localStorage) */
+
+const LS_USER = "aim_user";
+const LS_SESSION = "aim_session";
+
+function qs(sel){ return document.querySelector(sel); }
+function qsa(sel){ return Array.from(document.querySelectorAll(sel)); }
+
+function toast(msg, type="ok"){
+  let el = qs(".toast");
+  if(!el){
+    el = document.createElement("div");
+    el.className = "toast";
+    document.body.appendChild(el);
+  }
+  el.classList.remove("ok","bad","show");
+  el.classList.add(type === "bad" ? "bad" : "ok");
+  el.textContent = msg;
+  requestAnimationFrame(()=> el.classList.add("show"));
+  setTimeout(()=> el.classList.remove("show"), 2200);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Year
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+function setUser(email, password){
+  localStorage.setItem(LS_USER, JSON.stringify({email, password}));
+}
+function getUser(){
+  try { return JSON.parse(localStorage.getItem(LS_USER) || "null"); }
+  catch(e){ return null; }
+}
+function setSession(email){
+  localStorage.setItem(LS_SESSION, JSON.stringify({email, at: Date.now()}));
+}
+function getSession(){
+  try { return JSON.parse(localStorage.getItem(LS_SESSION) || "null"); }
+  catch(e){ return null; }
+}
+function clearSession(){
+  localStorage.removeItem(LS_SESSION);
+}
 
-  // Deposit tabs (used in modal + payments page)
-  const depositTabs = document.querySelectorAll('[data-deposit-tab]');
-  const depositGroups = document.querySelectorAll('[data-deposit-group]');
-  if (depositTabs.length && depositGroups.length) {
-    depositTabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.depositTab;
-        depositTabs.forEach(b => b.classList.toggle('active', b === btn));
-        depositGroups.forEach(g => {
-          g.classList.toggle('hidden-group', g.dataset.depositGroup !== target);
-        });
-      });
-    });
+function requireAuth(){
+  const session = getSession();
+  if(!session){
+    window.location.href = "login.html";
   }
+}
 
-  // Tournament tabs
-  const tTabs = document.querySelectorAll('[data-tournament-tab]');
-  const tGroups = document.querySelectorAll('[data-tournament-group]');
-  if (tTabs.length && tGroups.length) {
-    tTabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.tournamentTab;
-        tTabs.forEach(b => b.classList.toggle('active', b === btn));
-        tGroups.forEach(g => {
-          g.classList.toggle('hidden-group', g.dataset.tournamentGroup !== target);
-        });
-      });
-    });
-  }
-
-  // Account dropdown
-  const accountCard = document.querySelector('.account-switcher');
-  const accountSelect = document.getElementById('account-select');
-  const accountBalance = document.getElementById('account-balance');
-  const totalBalance = document.getElementById('total-balance');
-  if (accountCard && accountSelect && accountBalance) {
-    const real = accountCard.dataset.balanceReal || '$0.00';
-    const demo = accountCard.dataset.balanceDemo || '$10,000.00';
-
-    const updateAccountUI = () => {
-      const v = accountSelect.value;
-      if (v === 'demo') {
-        accountBalance.textContent = demo;
-        if (totalBalance) totalBalance.textContent = demo;
-      } else {
-        accountBalance.textContent = real;
-        if (totalBalance) totalBalance.textContent = real;
-      }
-    };
-    accountSelect.addEventListener('change', updateAccountUI);
-    updateAccountUI();
-  }
-
-  // AI feed rotation
-  const feedList = document.getElementById('ai-feed-list');
-  if (feedList) {
-    const messages = [
-      '[12:00] AI Bot: Scanning BTC, ETH and USDT markets...',
-      '[12:05] AI Bot: Risk level set to conservative for this account.',
-      '[12:10] AI Bot: Watching support levels on major pairs.',
-      '[12:15] AI Bot: No action required – portfolio remains balanced.',
-      '[12:20] AI Bot: Preparing next rebalancing window.'
-    ];
-    let index = 0;
-
-    const renderMessage = () => {
-      feedList.innerHTML = '';
-      const li = document.createElement('li');
-      li.textContent = messages[index];
-      feedList.appendChild(li);
-    };
-
-    renderMessage();
-    setInterval(() => {
-      index = (index + 1) % messages.length;
-      renderMessage();
-    }, 5000);
-  }
-
-  // Program modal
-  const programModal = document.getElementById('program-modal');
-  const programTitle = document.getElementById('program-modal-title');
-  const programTagline = document.getElementById('program-modal-tagline');
-  const programDetails = document.getElementById('program-modal-details');
-  const programButtons = document.querySelectorAll('.btn-program');
-
-  if (programModal && programTitle && programTagline && programDetails && programButtons.length) {
-    programButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const name = btn.dataset.programName || 'AI Program';
-        const risk = btn.dataset.programRisk || '';
-        const target = btn.dataset.programTarget || '';
-        const min = btn.dataset.programMin || '';
-
-        programTitle.textContent = name;
-        programTagline.textContent = risk;
-        programDetails.innerHTML = '';
-
-        if (target) {
-          const li1 = document.createElement('li');
-          li1.textContent = `Target return: ${target}`;
-          programDetails.appendChild(li1);
-        }
-        if (min) {
-          const li2 = document.createElement('li');
-          li2.textContent = `Minimum deposit: ${min}`;
-          programDetails.appendChild(li2);
-        }
-        const li3 = document.createElement('li');
-        li3.textContent = 'Funds will be allocated and monitored by the AI bot under this strategy.';
-        programDetails.appendChild(li3);
-
-        programModal.classList.remove('hidden');
-      });
-    });
-  }
-
-  // Avatar preview
-  const avatarInput = document.getElementById('avatar-input');
-  const avatarPreview = document.getElementById('avatar-preview');
-  if (avatarInput && avatarPreview) {
-    avatarInput.addEventListener('change', (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        avatarPreview.style.backgroundImage = `url(${ev.target.result})`;
-        avatarPreview.classList.add('has-image');
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
-  // Login form logic
-  const loginForm = document.getElementById('login-form');
-  const demoLoginBtn = document.getElementById('demo-login-btn');
-  const goDashboard = () => {
-    showToast('Logged in (demo mode)');
-    setTimeout(() => {
-      window.location.href = 'dashboard.html';
-    }, 800);
-  };
-
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+function wireLogout(){
+  qsa('[data-action="logout"]').forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
       e.preventDefault();
-      showToast('Checking credentials (demo)');
-      setTimeout(goDashboard, 600);
-    });
-  }
-  if (demoLoginBtn) {
-    demoLoginBtn.addEventListener('click', () => {
-      goDashboard();
-    });
-  }
-
-  // Forms feedback – deposit / withdraw / convert / gift card
-  document.querySelectorAll('.deposit-form, .withdraw-form, .convert-form').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      showToast('Request sent (demo only). Admin will review.');
-      form.reset();
+      clearSession();
+      toast("Logged out", "ok");
+      setTimeout(()=> window.location.href="login.html", 400);
     });
   });
-});
+}
 
-// Modal helpers
-function openDepositModal() {
-  const modal = document.getElementById('deposit-modal');
-  if (modal) modal.classList.remove('hidden');
+function wireLogin(){
+  const form = qs("#loginForm");
+  if(!form) return;
+
+  form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const email = (qs("#loginEmail")?.value || "").trim();
+    const pass  = (qs("#loginPass")?.value || "").trim();
+    const saved = getUser();
+
+    if(!saved){
+      toast("No account found. Please sign up first.", "bad");
+      return;
+    }
+    if(email.toLowerCase() !== saved.email.toLowerCase() || pass !== saved.password){
+      toast("Invalid email or password", "bad");
+      return;
+    }
+    setSession(saved.email);
+    toast("Login successful", "ok");
+    setTimeout(()=> window.location.href="dashboard.html", 450);
+  });
+
+  const demoBtn = qs("#demoBtn");
+  if(demoBtn){
+    demoBtn.addEventListener("click", ()=>{
+      // demo account always works
+      setSession("demo@aimcryptoai.app");
+      toast("Demo session started", "ok");
+      setTimeout(()=> window.location.href="dashboard.html", 450);
+    });
+  }
 }
-function closeDepositModal() {
-  const modal = document.getElementById('deposit-modal');
-  if (modal) modal.classList.add('hidden');
+
+function wireSignup(){
+  const form = qs("#signupForm");
+  if(!form) return;
+
+  form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const email = (qs("#signupEmail")?.value || "").trim();
+    const pass  = (qs("#signupPass")?.value || "").trim();
+    const pass2 = (qs("#signupPass2")?.value || "").trim();
+
+    if(!email || !pass){
+      toast("Please fill all fields", "bad");
+      return;
+    }
+    if(pass.length < 6){
+      toast("Password must be at least 6 characters", "bad");
+      return;
+    }
+    if(pass !== pass2){
+      toast("Passwords do not match", "bad");
+      return;
+    }
+    setUser(email, pass);
+    setSession(email);
+    toast("Account created", "ok");
+    setTimeout(()=> window.location.href="dashboard.html", 450);
+  });
 }
-function openWithdrawModal() {
-  const modal = document.getElementById('withdraw-modal');
-  if (modal) modal.classList.remove('hidden');
+
+function wireGuards(){
+  const page = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+  const protectedPages = ["dashboard.html","payments.html","profile.html","tournaments.html"];
+  if(protectedPages.includes(page)) requireAuth();
 }
-function closeWithdrawModal() {
-  const modal = document.getElementById('withdraw-modal');
-  if (modal) modal.classList.add('hidden');
-}
-function openConvertModal() {
-  const modal = document.getElementById('convert-modal');
-  if (modal) modal.classList.remove('hidden');
-}
-function closeConvertModal() {
-  const modal = document.getElementById('convert-modal');
-  if (modal) modal.classList.add('hidden');
-}
-function closeProgramModal() {
-  const modal = document.getElementById('program-modal');
-  if (modal) modal.classList.add('hidden');
-}
-function scrollToWallet() {
-  const el = document.getElementById('wallet');
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}
+
+/* init */
+document.addEventListener("DOMContentLoaded", ()=>{
+  wireGuards();
+  wireLogout();
+  wireLogin();
+  wireSignup();
+});
