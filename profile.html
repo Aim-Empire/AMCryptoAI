@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIM Crypto AI – Profile & KYC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page page-profile">
+  <header class="topbar">
+    <div class="logo">AIM<span>Crypto</span>AI</div>
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="payments.html">Payments</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="profile.html" class="active">Profile / KYC</a>
+      <a href="index.html" class="btn btn-outline">Logout</a>
+    </nav>
+  </header>
+
+  <main class="content profile-content">
+    <section class="grid grid-2">
+      <div class="card">
+        <h2>Profile</h2>
+        <p class="muted small">Basic information about your account.</p>
+
+        <div class="profile-avatar-block">
+          <div class="avatar-circle" id="avatar-preview">
+            <span>👤</span>
+          </div>
+          <label class="avatar-upload-label">
+            Change photo
+            <input type="file" id="avatar-input" accept="image/*">
+          </label>
+        </div>
+
+        <div class="profile-field">
+          <span class="label">Full Name</span>
+          <span class="value">Your Name Here</span>
+        </div>
+        <div class="profile-field">
+          <span class="label">Email</span>
+          <span class="value">you@example.com</span>
+        </div>
+        <div class="profile-field">
+          <span class="label">Country</span>
+          <span class="value">Not set</span>
+        </div>
+
+        <div class="kyc-status kyc-pending">
+          <span class="badge">KYC: Pending</span>
+          <p class="muted small">
+            Complete your KYC details so deposits and withdrawals can be enabled for your account.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>KYC Verification</h2>
+        <p class="muted small">
+          Provide accurate information. Admin will review before approving.
+        </p>
+        <form class="form">
+          <label>
+            Full Name (as on ID)
+            <input type="text" placeholder="Exact name on document" required>
+          </label>
+          <label>
+            Date of Birth
+            <input type="date" required>
+          </label>
+          <label>
+            Residential Address
+            <input type="text" placeholder="Full address" required>
+          </label>
+          <label>
+            ID Type
+            <select required>
+              <option value="">Select ID</option>
+              <option value="passport">International Passport</option>
+              <option value="nid">National ID</option>
+              <option value="dl">Driver's License</option>
+              <option value="other">Other Govt ID</option>
+            </select>
+          </label>
+          <label>
+            ID Number
+            <input type="text" placeholder="ID number" required>
+          </label>
+          <label>
+            ID Upload
+            <input type="text" placeholder="Link / code for where to upload (to be integrated later)">
+          </label>
+          <button type="submit" class="btn btn-primary">Submit KYC</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> AIM Crypto AI.</p>
+  </footer>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html">
+      <span class="icon">📈</span>
+      <span class="label">Dashboard</span>
+    </a>
+    <a href="payments.html">
+      <span class="icon">💳</span>
+      <span class="label">Payments</span>
+    </a>
+    <a href="tournaments.html">
+      <span class="icon">🏆</span>
+      <span class="label">Tournaments</span>
+    </a>
+    <a href="profile.html" class="active">
+      <span class="icon">👤</span>
+      <span class="label">Profile</span>
+    </a>
+  </nav>
+
+  <div id="toast-container"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

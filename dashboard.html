@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIM Crypto AI – Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page page-dashboard">
+  <header class="topbar">
+    <div class="logo">AIM<span>Crypto</span>AI</div>
+    <nav class="nav-links">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="payments.html">Payments</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="profile.html">Profile / KYC</a>
+      <a href="index.html" class="btn btn-outline">Logout</a>
+    </nav>
+  </header>
+
+  <main class="content dashboard-content">
+    <!-- Top Stats -->
+    <section class="grid grid-3">
+      <div class="card stat-card">
+        <h3>Total Balance</h3>
+        <p class="stat-main" id="total-balance">$0.00</p>
+        <p class="muted small">Funds available in the selected account.</p>
+      </div>
+
+      <div class="card stat-card">
+        <h3>AI-Managed Investments</h3>
+        <p class="stat-main">$0.00</p>
+        <p class="muted small">Amount currently allocated by the AI bot.</p>
+      </div>
+
+      <div class="card stat-card">
+        <h3>Shared Pool (All Users)</h3>
+        <p class="stat-main">$0.00</p>
+        <p class="muted small">Total global pool managed on the platform.</p>
+      </div>
+    </section>
+
+    <!-- Bonus & VIP -->
+    <section class="grid grid-2">
+      <div class="card bonus-card">
+        <div class="bonus-label">Welcome Bonus</div>
+        <h2>Get up to 100% extra on first deposit</h2>
+        <p class="muted small">
+          Bonus valid for early AIM Crypto AI adopters until <strong>Dec 18, 2025</strong>. 
+          Terms apply, bonus funds are for trading only.
+        </p>
+        <button class="btn btn-primary btn-sm" onclick="openDepositModal()">Activate Bonus</button>
+      </div>
+
+      <div class="card vip-card">
+        <div class="vip-header">
+          <span class="vip-icon">👑</span>
+          <div>
+            <h2>VIP Program</h2>
+            <p class="muted xsmall">Higher limits · Priority support · Custom strategies</p>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm">View VIP requirements</button>
+      </div>
+    </section>
+
+    <!-- Account Switcher -->
+    <section class="card account-switcher"
+             data-balance-real="$0.00"
+             data-balance-demo="$10,000.00">
+      <div class="account-main">
+        <p class="muted small">Current account</p>
+        <div class="account-select-row">
+          <select id="account-select">
+            <option value="real">Real account</option>
+            <option value="demo">Demo account</option>
+          </select>
+          <span id="account-balance" class="account-balance">$0.00</span>
+        </div>
+      </div>
+      <div class="account-actions">
+        <button class="btn btn-secondary" onclick="openWithdrawModal()">Withdraw</button>
+        <button class="btn btn-primary" onclick="openDepositModal()">Deposit</button>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="card quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="openDepositModal()">Deposit</button>
+        <button class="btn btn-secondary" onclick="openWithdrawModal()">Withdraw</button>
+        <button class="btn btn-secondary" onclick="openConvertModal()">Convert Crypto</button>
+        <button class="btn btn-outline" onclick="scrollToWallet()">View Wallet</button>
+      </div>
+      <p class="muted small">
+        Deposits and withdrawals are verified by admin before they reflect on your balance.
+      </p>
+    </section>
+
+    <!-- My Investments + Market Watch -->
+    <section class="grid grid-2">
+      <div class="card">
+        <div class="section-header-row">
+          <h2>My Investments</h2>
+          <div class="pill-toggle small-pills">
+            <button class="pill active">Active</button>
+            <button class="pill">Closed</button>
+          </div>
+        </div>
+        <div class="empty-state">
+          <p class="muted">Start investing to see your active and closed positions here.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Market Watch</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Symbol</th>
+              <th>Price (USD)</th>
+              <th>24h Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="coin-icon">₿</span>Bitcoin</td>
+              <td>BTC</td>
+              <td>$0.00</td>
+              <td>0.00%</td>
+            </tr>
+            <tr>
+              <td><span class="coin-icon">Ξ</span>Ethereum</td>
+              <td>ETH</td>
+              <td>$0.00</td>
+              <td>0.00%</td>
+            </tr>
+            <tr>
+              <td><span class="coin-icon">⩚</span>Tether</td>
+              <td>USDT</td>
+              <td>$1.00</td>
+              <td>0.00%</td>
+            </tr>
+            <tr>
+              <td><span class="coin-icon">◎</span>BNB</td>
+              <td>BNB</td>
+              <td>$0.00</td>
+              <td>0.00%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="muted small">
+          Market data is in demo mode. Later you can connect an API or chart provider.
+        </p>
+      </div>
+    </section>
+
+    <!-- Simple Chart Demo -->
+    <section class="card">
+      <h2>BTC/USDT Chart (Demo)</h2>
+      <div class="chart-demo">
+        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+          <polyline
+            fill="none"
+            stroke="rgba(74, 222, 128, 0.9)"
+            stroke-width="2"
+            points="0,40 20,45 40,30 60,35 80,25 100,28 120,18 140,22 160,15 180,20 200,10"
+          />
+        </svg>
+      </div>
+      <p class="muted xsmall">
+        This is a visual sample line. You can later embed a real chart (e.g. TradingView widget) here.
+      </p>
+    </section>
+
+    <!-- AI Bot Feed -->
+    <section class="card">
+      <h2>AI Bot Feed / Live Updates</h2>
+      <div class="live-feed" id="ai-feed">
+        <ul class="list small" id="ai-feed-list">
+          <li>AI Bot is starting your market overview...</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Wallet Overview -->
+    <section id="wallet" class="card">
+      <h2>Wallet Overview</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Coin</th>
+            <th>Available</th>
+            <th>In AI Strategy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BTC</td>
+            <td>0.00000000</td>
+            <td>0.00000000</td>
+          </tr>
+          <tr>
+            <td>ETH</td>
+            <td>0.00000000</td>
+            <td>0.00000000</td>
+          </tr>
+          <tr>
+            <td>USDT</td>
+            <td>0.00</td>
+            <td>0.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted small">
+        Wallet values update after deposits, conversions, and AI allocations.
+      </p>
+    </section>
+
+    <!-- AI Programs / Pools -->
+    <section class="card">
+      <h2>AI Programs & Pools</h2>
+      <p class="muted small">Different strategies your AI bot can join.</p>
+      <div class="program-list">
+        <article class="program-card">
+          <div class="program-badge">LOW RISK</div>
+          <h3>Stable Shield Pool</h3>
+          <p class="muted small">Focus on stablecoins and blue-chip assets.</p>
+          <div class="program-meta">
+            <span>Target: 3–5% / month</span>
+            <span>Min. deposit: $50</span>
+          </div>
+          <button
+            class="btn btn-secondary btn-program"
+            data-program-name="Stable Shield Pool"
+            data-program-risk="Low risk – stablecoins and blue-chip crypto assets."
+            data-program-target="3–5% per month"
+            data-program-min="$50"
+          >
+            View Details
+          </button>
+        </article>
+
+        <article class="program-card">
+          <div class="program-badge orange">BALANCED</div>
+          <h3>Trend Rider Pool</h3>
+          <p class="muted small">Mix of BTC/ETH and top altcoins following trend.</p>
+          <div class="program-meta">
+            <span>Target: 5–10% / month</span>
+            <span>Min. deposit: $100</span>
+          </div>
+          <button
+            class="btn btn-secondary btn-program"
+            data-program-name="Trend Rider Pool"
+            data-program-risk="Balanced – trend-following with controlled risk."
+            data-program-target="5–10% per month"
+            data-program-min="$100"
+          >
+            View Details
+          </button>
+        </article>
+
+        <article class="program-card">
+          <div class="program-badge red">AGGRESSIVE</div>
+          <h3>High Voltage Pool</h3>
+          <p class="muted small">High-volatility plays with strict risk caps.</p>
+          <div class="program-meta">
+            <span>Target: 10%+ / month</span>
+            <span>Min. deposit: $200</span>
+          </div>
+          <button
+            class="btn btn-secondary btn-program"
+            data-program-name="High Voltage Pool"
+            data-program-risk="Aggressive – high volatility, capped risk per position."
+            data-program-target="10%+ per month"
+            data-program-min="$200"
+          >
+            View Details
+          </button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- DEPOSIT / WITHDRAW / CONVERT MODALS (same as before) -->
+  <div id="deposit-modal" class="modal hidden">
+    <div class="modal-backdrop" onclick="closeDepositModal()"></div>
+    <div class="modal-dialog">
+      <h2>Deposit Funds</h2>
+      <p class="muted small">
+        Select your preferred method and fill in the details. Admin will verify and credit your dashboard.
+      </p>
+
+      <!-- Tabs -->
+      <div class="deposit-tabs">
+        <button type="button" class="deposit-tab active" data-deposit-tab="recommended">Recommended</button>
+        <button type="button" class="deposit-tab" data-deposit-tab="crypto">Crypto</button>
+        <button type="button" class="deposit-tab" data-deposit-tab="other">Other</button>
+      </div>
+
+      <!-- Recommended Methods -->
+      <div class="deposit-group" data-deposit-group="recommended">
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">🏦</div>
+            <div>
+              <div class="method-title">Bank Transfer</div>
+              <div class="method-meta">Instant • min $50</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">💳</div>
+            <div>
+              <div class="method-title">Debit / Credit Card</div>
+              <div class="method-meta">Instant • min $25</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crypto Methods -->
+      <div class="deposit-group hidden-group" data-deposit-group="crypto">
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">₿</div>
+            <div>
+              <div class="method-title">Bitcoin (BTC)</div>
+              <div class="method-meta">5–60 min • min $10</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">🪙</div>
+            <div>
+              <div class="method-title">Tether (USDT)</div>
+              <div class="method-meta">On-chain • min $10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Methods -->
+      <div class="deposit-group hidden-group" data-deposit-group="other">
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">🎁</div>
+            <div>
+              <div class="method-title">Gift Card</div>
+              <div class="method-meta">Min value $20</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Form -->
+      <form class="form deposit-form">
+        <label>
+          Deposit method
+          <select required>
+            <option value="">Select method</option>
+            <option>Bank transfer</option>
+            <option>Debit / Credit Card</option>
+            <option>Bitcoin (BTC)</option>
+            <option>Tether (USDT)</option>
+            <option>Gift Card</option>
+          </select>
+        </label>
+
+        <label>
+          Amount (in USD)
+          <input type="number" min="1" step="0.01" placeholder="100.00" required>
+        </label>
+
+        <label>
+          Gift Card Type (for gift card only)
+          <select>
+            <option value="">Select card type (optional)</option>
+            <option>Steam</option>
+            <option>Apple / iTunes</option>
+            <option>Google Play</option>
+            <option>Amazon</option>
+            <option>Razer Gold</option>
+          </select>
+        </label>
+
+        <label>
+          Upload card / receipt (optional)
+          <input type="file" accept="image/*">
+        </label>
+
+        <label>
+          Transaction Reference / Hash
+          <input type="text" placeholder="Paste your transaction ID or reference" required>
+        </label>
+
+        <label>
+          Note to Admin (optional)
+          <textarea rows="3" placeholder="Any extra info about this deposit"></textarea>
+        </label>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="closeDepositModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Deposit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="withdraw-modal" class="modal hidden">
+    <div class="modal-backdrop" onclick="closeWithdrawModal()"></div>
+    <div class="modal-dialog">
+      <h2>Withdraw Funds</h2>
+      <p class="muted small">Request a withdrawal from your current account.</p>
+      <form class="form withdraw-form">
+        <label>
+          Amount (in USD)
+          <input type="number" min="1" step="0.01" placeholder="50.00" required>
+        </label>
+        <label>
+          Destination Method
+          <input type="text" placeholder="Bank, crypto wallet, etc." required>
+        </label>
+        <label>
+          Destination Details
+          <textarea rows="3" placeholder="Account number, wallet address, or other details" required></textarea>
+        </label>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="closeWithdrawModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Withdrawal Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="convert-modal" class="modal hidden">
+    <div class="modal-backdrop" onclick="closeConvertModal()"></div>
+    <div class="modal-dialog">
+      <h2>Convert Crypto</h2>
+      <p class="muted small">Move value from one coin to another inside your wallet.</p>
+      <form class="form convert-form">
+        <label>
+          From
+          <input type="text" placeholder="e.g. BTC" required>
+        </label>
+        <label>
+          To
+          <input type="text" placeholder="e.g. USDT" required>
+        </label>
+        <label>
+          Amount
+          <input type="number" min="0" step="0.00000001" placeholder="0.01000000" required>
+        </label>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" onclick="closeConvertModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Convert Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Program Details Modal -->
+  <div id="program-modal" class="modal hidden">
+    <div class="modal-backdrop" onclick="closeProgramModal()"></div>
+    <div class="modal-dialog">
+      <h2 id="program-modal-title">AI Program</h2>
+      <p class="muted small" id="program-modal-tagline"></p>
+      <ul class="list small" id="program-modal-details"></ul>
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" onclick="closeProgramModal()">Close</button>
+        <button type="button" class="btn btn-primary">Start with this Program</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> AIM Crypto AI.</p>
+  </footer>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="active">
+      <span class="icon">📈</span>
+      <span class="label">Dashboard</span>
+    </a>
+    <a href="payments.html">
+      <span class="icon">💳</span>
+      <span class="label">Payments</span>
+    </a>
+    <a href="tournaments.html">
+      <span class="icon">🏆</span>
+      <span class="label">Tournaments</span>
+    </a>
+    <a href="profile.html">
+      <span class="icon">👤</span>
+      <span class="label">Profile</span>
+    </a>
+  </nav>
+
+  <div id="toast-container"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

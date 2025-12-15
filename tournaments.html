@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIM Crypto AI – Tournaments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page page-tournaments">
+  <header class="topbar">
+    <div class="logo">AIM<span>Crypto</span>AI</div>
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="payments.html">Payments</a>
+      <a href="tournaments.html" class="active">Tournaments</a>
+      <a href="profile.html">Profile / KYC</a>
+      <a href="index.html" class="btn btn-outline">Logout</a>
+    </nav>
+  </header>
+
+  <main class="content tournaments-content">
+    <section class="card">
+      <h1>Tournaments</h1>
+      <p class="muted small">
+        Join demo trading tournaments, compete on performance and climb the leaderboard.
+      </p>
+
+      <div class="tournament-tabs">
+        <button class="tournament-tab active" data-tournament-tab="joined">Joined</button>
+        <button class="tournament-tab" data-tournament-tab="available">Available</button>
+        <button class="tournament-tab" data-tournament-tab="history">History</button>
+      </div>
+    </section>
+
+    <!-- Joined -->
+    <section class="card tournament-group" data-tournament-group="joined">
+      <p class="muted small">You haven't joined any tournament yet.</p>
+    </section>
+
+    <!-- Available -->
+    <section class="card tournament-group hidden-group" data-tournament-group="available">
+      <article class="tournament-card">
+        <div class="tournament-status">FINISH IN 5D</div>
+        <h2>12th Anniversary Cup 🏆</h2>
+        <p class="muted small">
+          Compete with global traders using your demo balance. Highest return wins.
+        </p>
+        <div class="tournament-meta">
+          <span>Prize pool: <strong>$56,000</strong></span>
+          <span>Winners: <strong>12</strong></span>
+          <span>Participants: 5,600+</span>
+        </div>
+        <button class="btn btn-primary btn-sm">Registration – $8 (demo placeholder)</button>
+      </article>
+
+      <article class="tournament-card">
+        <div class="tournament-status brown">FINISH IN 4W</div>
+        <h2>December Challenge 📅</h2>
+        <p class="muted small">
+          Monthly challenge for consistent traders. Track your performance for 30 days.
+        </p>
+        <div class="tournament-meta">
+          <span>Prize pool: <strong>$50,000</strong></span>
+          <span>Winners: <strong>20</strong></span>
+          <span>Participants: 4,000+</span>
+        </div>
+        <button class="btn btn-primary btn-sm">Registration – $5 (demo placeholder)</button>
+      </article>
+    </section>
+
+    <!-- History -->
+    <section class="card tournament-group hidden-group" data-tournament-group="history">
+      <article class="tournament-card">
+        <div class="tournament-status completed">COMPLETED</div>
+        <h2>Austin 1000</h2>
+        <div class="tournament-meta">
+          <span>Prize pool: <strong>$1,000</strong></span>
+          <span>Winners: <strong>5</strong></span>
+          <span>Participants: 2,900+</span>
+        </div>
+      </article>
+
+      <article class="tournament-card">
+        <div class="tournament-status completed">COMPLETED</div>
+        <h2>Weekend Treat 🔔</h2>
+        <div class="tournament-meta">
+          <span>Prize pool: <strong>$1,500</strong></span>
+          <span>Winners: <strong>5</strong></span>
+          <span>Participants: 2,800+</span>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> AIM Crypto AI.</p>
+  </footer>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html">
+      <span class="icon">📈</span>
+      <span class="label">Dashboard</span>
+    </a>
+    <a href="payments.html">
+      <span class="icon">💳</span>
+      <span class="label">Payments</span>
+    </a>
+    <a href="tournaments.html" class="active">
+      <span class="icon">🏆</span>
+      <span class="label">Tournaments</span>
+    </a>
+    <a href="profile.html">
+      <span class="icon">👤</span>
+      <span class="label">Profile</span>
+    </a>
+  </nav>
+
+  <div id="toast-container"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

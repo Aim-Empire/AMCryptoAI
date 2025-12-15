@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIM Crypto AI – Payments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page page-payments">
+  <header class="topbar">
+    <div class="logo">AIM<span>Crypto</span>AI</div>
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="payments.html" class="active">Payments</a>
+      <a href="tournaments.html">Tournaments</a>
+      <a href="profile.html">Profile / KYC</a>
+      <a href="index.html" class="btn btn-outline">Logout</a>
+    </nav>
+  </header>
+
+  <main class="content payments-content">
+    <section class="card">
+      <h1>Payments</h1>
+      <p class="muted small">
+        Manage your deposits and withdrawals. All payments are reviewed by admin for security.
+      </p>
+    </section>
+
+    <section class="grid grid-2">
+      <div class="card">
+        <h2>Current Balance</h2>
+        <p class="stat-main">$0.00</p>
+        <p class="muted small">Select your account inside the dashboard to switch between Real and Demo.</p>
+      </div>
+      <div class="card bonus-card">
+        <div class="bonus-label">Welcome Bonus</div>
+        <h2>Up to 100% on first deposit</h2>
+        <p class="muted xsmall">Valid until Dec 18, 2025 · Conditions apply</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="deposit-tabs">
+        <button type="button" class="deposit-tab active" data-deposit-tab="recommended">Recommended</button>
+        <button type="button" class="deposit-tab" data-deposit-tab="crypto">Crypto</button>
+        <button type="button" class="deposit-tab" data-deposit-tab="other">Other</button>
+      </div>
+
+      <!-- Recommended -->
+      <div class="deposit-group" data-deposit-group="recommended">
+        <p class="muted xsmall">Fast and popular options for most users.</p>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">🏦</div>
+            <div>
+              <div class="method-title">Bank transfer</div>
+              <div class="method-meta">Instantly • min $50</div>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="openDepositModal()">Use</button>
+        </div>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">💳</div>
+            <div>
+              <div class="method-title">Debit / Credit Card</div>
+              <div class="method-meta">Instantly • min $25</div>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="openDepositModal()">Use</button>
+        </div>
+      </div>
+
+      <!-- Crypto -->
+      <div class="deposit-group hidden-group" data-deposit-group="crypto">
+        <p class="muted xsmall">Fund your wallet using blockchain transfers.</p>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">₿</div>
+            <div>
+              <div class="method-title">Bitcoin (BTC)</div>
+              <div class="method-meta">5–60 minutes • min $10</div>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="openDepositModal()">Use</button>
+        </div>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">🪙</div>
+            <div>
+              <div class="method-title">Tether (USDT)</div>
+              <div class="method-meta">USDT TRC20 / ERC20 • min $10</div>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="openDepositModal()">Use</button>
+        </div>
+      </div>
+
+      <!-- Other -->
+      <div class="deposit-group hidden-group" data-deposit-group="other">
+        <p class="muted xsmall">Alternative payment options for special cases.</p>
+
+        <div class="deposit-method-card">
+          <div class="method-info">
+            <div class="method-icon">🎁</div>
+            <div>
+              <div class="method-title">Gift Card Payment</div>
+              <div class="method-meta">Steam, Apple, Google Play, Amazon, more</div>
+            </div>
+          </div>
+        </div>
+
+        <form class="form deposit-form">
+          <label>
+            Gift card type
+            <select required>
+              <option value="">Select card type</option>
+              <option>Steam</option>
+              <option>Apple / iTunes</option>
+              <option>Google Play</option>
+              <option>Amazon</option>
+              <option>Razer Gold</option>
+            </select>
+          </label>
+
+          <label>
+            Card value (USD)
+            <input type="number" min="10" step="1" placeholder="50" required>
+          </label>
+
+          <label>
+            Upload card front / receipt
+            <input type="file" accept="image/*" required>
+          </label>
+
+          <label>
+            Extra note (optional)
+            <textarea rows="3" placeholder="Pin, serial or any extra info admin needs"></textarea>
+          </label>
+
+          <button type="submit" class="btn btn-primary">Submit Gift Card Payment</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Withdrawal history (demo)</h2>
+      <p class="muted small">You don't have any transactions yet.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> AIM Crypto AI.</p>
+  </footer>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html">
+      <span class="icon">📈</span>
+      <span class="label">Dashboard</span>
+    </a>
+    <a href="payments.html" class="active">
+      <span class="icon">💳</span>
+      <span class="label">Payments</span>
+    </a>
+    <a href="tournaments.html">
+      <span class="icon">🏆</span>
+      <span class="label">Tournaments</span>
+    </a>
+    <a href="profile.html">
+      <span class="icon">👤</span>
+      <span class="label">Profile</span>
+    </a>
+  </nav>
+
+  <div id="toast-container"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
